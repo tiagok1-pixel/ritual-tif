@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Isotipo de Ritual: caja abierta con una R y tres destellos">
+  <defs>
+    <path id="s" d="M0-10Q1.6-1.6 10 0Q1.6 1.6 0 10Q-1.6 1.6-10 0Q-1.6-1.6 0-10Z"/>
+  </defs>
+  <rect width="128" height="128" rx="26" fill="#CDD9E6"/>
+  <g fill="#5B1E2B">
+    <use href="#s" transform="translate(64 24) scale(1.2)"/>
+    <use href="#s" transform="translate(36 42) scale(.6)"/>
+    <use href="#s" transform="translate(92 42) scale(.6)"/>
+    <path d="M24 74L60 86V116L24 104Z"/>
+    <path d="M64 86L100 74V104L64 116Z"/>
+    <path d="M22 72L4 62L40 52L60 64Z"/>
+    <path d="M102 72L120 62L84 52L64 64Z"/>
+  </g>
+  <text x="0" y="0" transform="translate(76 106) skewY(-18)" font-family="Outfit, Arial, sans-serif" font-weight="800" font-size="20" fill="#CDD9E6">R</text>
+</svg>
