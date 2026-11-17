@@ -168,9 +168,13 @@ mark.todo { background: var(--celeste); color: var(--bordo); padding: 2px 8px; b
 
 .kit-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px; display: flex; flex-direction: column; transition: transform .22s ease, box-shadow .22s ease; }
 .kit-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
-.kit-card__img { border-radius: 16px; overflow: hidden; aspect-ratio: 1; background: var(--celeste); }
-.kit-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
-.kit-card:hover .kit-card__img img { transform: scale(1.04); }
+.kit-card__img { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 5 / 4; background: var(--off); cursor: pointer; }
+.kit-card__img img { width: 100%; height: 100%; object-fit: cover; }
+/* caja abierta: aparece encima al pasar el mouse o al enfocar la tarjeta con el teclado */
+.kit-card__open { position: absolute; inset: 0; opacity: 0; transition: opacity .35s ease; }
+.kit-card:hover .kit-card__open, .kit-card:focus-within .kit-card__open { opacity: 1; }
+.img-note { font-size: .82rem; color: var(--muted); }
+.ejes__note { text-align: center; margin-top: 28px; }
 .kit-card__body { padding: 14px 8px 8px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
 .kit-card__name { font-size: 1.15rem; font-weight: 700; color: var(--bordo); }
 .kit-card__phrase { color: var(--muted); font-size: .92rem; line-height: 1.35; flex: 1; }
@@ -270,8 +274,9 @@ dialog::backdrop { background: rgba(43,18,24,.55); backdrop-filter: blur(2px); }
 .modal__close:hover { background: var(--celeste); }
 
 .kit-modal { display: grid; }
-.kit-modal__media { background: var(--celeste); }
-.kit-modal__media img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.kit-modal__media { background: var(--off); display: grid; gap: 10px; align-content: start; padding: 12px; }
+.kit-modal__media img { width: 100%; height: auto; aspect-ratio: 5 / 4; object-fit: cover; border-radius: 18px; }
+.kit-modal__media .img-note { text-align: center; padding: 0 8px 4px; }
 .kit-modal__content { padding: 26px 22px 28px; display: grid; gap: 14px; align-content: start; }
 .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--bordo); font-weight: 600; background: var(--celeste-50); padding: 4px 14px 4px 10px; border-radius: 999px; justify-self: start; font-size: .92rem; }
 .eyebrow .icon { width: 1.2em; height: 1.2em; }
@@ -297,7 +302,7 @@ dialog::backdrop { background: rgba(43,18,24,.55); backdrop-filter: blur(2px); }
 .link-btn { background: none; border: 0; padding: 8px; color: var(--bordo); font-weight: 600; text-decoration: underline; text-underline-offset: 4px; justify-self: center; }
 @media (min-width: 760px) {
   .kit-modal { grid-template-columns: 5fr 6fr; }
-  .kit-modal__media img { height: 100%; aspect-ratio: auto; min-height: 100%; }
+  .kit-modal__media { padding: 16px; }
   .kit-modal__content { padding: 36px 36px 32px; }
   .checklist { grid-template-columns: 1fr 1fr; gap: 8px 14px; }
 }

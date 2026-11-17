@@ -10,7 +10,7 @@ Es solo front-end: no hay tienda real, ni base de datos, ni pagos. Está hecho c
 | `index.html` | La página completa (textos fijos, preguntas frecuentes, footer). |
 | `css/styles.css` | Colores, tipografía y diseño. |
 | `js/main.js` | **Precios, kits y suscripciones**, más el carrito y los modales. |
-| `assets/` | Imágenes (hoy son ilustraciones provisorias) e isotipo/favicon. |
+| `assets/` | Imágenes de los kits (caja cerrada y abierta), fondo del hero e isotipo/favicon. |
 
 ## (a) Cómo publicarlo gratis en Vercel
 
@@ -35,7 +35,7 @@ Cada vez que cambies algo en GitHub, Vercel republica solo.
 - **Precios**: líneas 10 y 11 (`PRICE_PP` = compra puntual por persona, `SUB_PP` = suscripción por persona). Los totales de 2 y 3 personas se calculan solos.
 - **Nombre, frase, descripción, qué trae y "te quedás con" de cada kit**: bloque `KITS`, desde la línea 25.
 - **Nombres y bajadas de los ejes**: bloque `EJES`, línea 16.
-- **Suscripciones**: bloque `SUBS`, línea 77.
+- **Suscripciones**: bloque `SUBS`, línea 83.
 
 El resto de los textos (hero, "Cómo funciona", preguntas frecuentes, footer) están en `index.html`: buscá el texto con Ctrl+F (o Cmd+F) y cambialo ahí mismo.
 
@@ -43,17 +43,19 @@ Los colores están en las primeras líneas de `css/styles.css`.
 
 ## (c) Cómo reemplazar una imagen
 
-Hoy las cajas son ilustraciones provisorias (`assets/kit-*.svg`) y el fondo del hero es una escena abstracta (`assets/hero.svg`).
+Cada kit tiene dos imágenes en `assets/`: la caja **cerrada** (`kit-noche-italiana.jpg`) y la caja **abierta** (`kit-noche-italiana-abierta.jpg`). En la grilla se ve la cerrada y, al pasar el mouse, aparece la abierta. En el detalle del kit se ven las dos.
 
-1. Guardá tu foto en `assets/` (cuadrada, **800 × 800 px**, formato `.jpg` y de menos de 200 KB, por ejemplo `kit-noche-italiana.jpg`).
-2. En `js/main.js` buscá el kit y cambiá la línea `img: 'assets/kit-noche-italiana.svg'` por `img: 'assets/kit-noche-italiana.jpg'`.
+Para cambiar una, lo más fácil es **pisar el archivo con el mismo nombre**: no hay que tocar código. Usá formato `.jpg`, proporción 5:4 (por ejemplo **1100 × 880 px**) y menos de 250 KB.
 
-**Fotos que faltan:**
+Si preferís otro nombre de archivo, cambiá las líneas `img:` (cerrada) e `imgOpen:` (abierta) del kit en `js/main.js`.
+
+Las imágenes son ilustrativas (no son fotos reales del producto) y el sitio lo aclara debajo de la grilla, en el detalle de cada kit y en el footer.
+
+**Imágenes que todavía son provisorias:**
 
 | Imagen | Tamaño recomendado | Dónde se cambia |
 |---|---|---|
-| Foto de cada uno de los 6 kits | 800 × 800 px | `img` de cada kit en `js/main.js` |
-| Foto de fondo del hero | 1600 × 900 px | En `index.html`, `src="assets/hero.svg"` dentro de `<img class="hero__bg">` |
+| Foto de fondo del hero (hoy es una escena abstracta) | 1600 × 900 px | En `index.html`, `src="assets/hero.svg"` dentro de `<img class="hero__bg">` |
 | Estante de cafeterías (opcional, hoy es una ilustración) | 1120 × 680 px | Bloque `<svg>` de la sección `#cafeterias` en `index.html` |
 | Fotos de "Compartí" (opcional, hoy son 6 recuadros) | 600 × 600 px | Sección `#comparti` en `index.html` |
 
@@ -62,7 +64,8 @@ El favicon es el isotipo: `assets/isotipo.svg`. Es un dibujo simple hecho para e
 ## (d) Pendientes marcados como [CONFIRMAR]
 
 - **Usuario de Instagram**: el texto dice `@ritual.kits [CONFIRMAR usuario]` (sección "Compartí" en `index.html`). Los íconos de Instagram y TikTok del footer no tienen link; cuando existan las cuentas, hay que agregar las URLs en el footer.
-- **Fotos reales** de los 6 kits y del hero (ver tabla de arriba).
+- **Foto del hero** (ver tabla de arriba). Las de los 6 kits ya están cargadas.
+- **Contenido de las imágenes vs. lista del kit**: en algunas imágenes los rótulos no coinciden exactamente con la lista "Qué trae la caja" (por ejemplo, "Alfajor" y "Gorro de chef" en Noche italiana). El sitio aclara que son ilustrativas; revisar si conviene ajustar alguna.
 - **10% off en tu primera compra**: figura en la barra superior pero el carrito del mockup no lo aplica ni muestra cómo se canjea. Definir si se agrega un código o se aplica automático.
 - **Costo de envío**: el sitio solo dice que "se calcula aparte en el checkout"; no hay tarifa inventada.
 

@@ -20,8 +20,8 @@ const EJES = [
 ];
 
 // ---------- KITS ----------
-// img: ruta de la foto. Hoy son ilustraciones provisorias (.svg). Para usar una foto real,
-// subila a /assets y cambiá la ruta (ej.: 'assets/kit-noche-italiana.jpg'). Ver README.
+// img: foto de la caja cerrada. imgOpen: foto de la caja abierta (aparece al pasar el mouse
+// por la tarjeta y en el detalle del kit). Para cambiarlas, ver README.
 const KITS = [
   {
     id: 'noche-italiana', eje: 'saborea', name: 'Noche italiana',
@@ -29,7 +29,8 @@ const KITS = [
     desc: 'Convierte la preparación de una cena de pastas en un plan compartido: cocinan juntos y la comida es el plan.',
     items: ['fettuccini Don Vicente', 'salsa filetto', 'saborizador de albahaca y ajo', 'grisines', 'queso', 'aceite Laur de 30 ml', 'bocadito Cachafaz', 'delantal y cofia'],
     keep: 'delantal y cofia',
-    img: 'assets/kit-noche-italiana.svg'
+    img: 'assets/kit-noche-italiana.jpg',
+    imgOpen: 'assets/kit-noche-italiana-abierta.jpg'
   },
   {
     id: 'mocktail-bar', eje: 'saborea', name: 'Mocktail bar',
@@ -37,7 +38,8 @@ const KITS = [
     desc: 'Preparar y probar tragos sin alcohol, con todo lo necesario y un recetario para guiarse.',
     items: ['copón', 'tónica', 'gaseosa de pomelo', 'ginger ale', 'jugos Baggio', 'jugo de limón', 'mix de cítricos deshidratados', 'sorbete de acero', 'cuchara de bar', 'jigger', 'recetario de tragos sin alcohol'],
     keep: 'copón, cuchara de bar y jigger',
-    img: 'assets/kit-mocktail-bar.svg'
+    img: 'assets/kit-mocktail-bar.jpg',
+    imgOpen: 'assets/kit-mocktail-bar-abierta.jpg'
   },
   {
     id: 'aroma-y-luz', eje: 'crea', name: 'Aroma & Luz',
@@ -45,7 +47,8 @@ const KITS = [
     desc: 'Cada participante hace y personaliza su propia vela.',
     items: ['vaso Tennessee con tapa de pino', 'cera de soja', 'pabilo', 'centrador', 'esencia de 15 cc (44 aromas a elección)', 'pétalos y lavanda', 'pigmento', 'etiqueta para personalizar', 'fósforos'],
     keep: 'la vela en su vaso con tapa',
-    img: 'assets/kit-aroma-y-luz.svg'
+    img: 'assets/kit-aroma-y-luz.jpg',
+    imgOpen: 'assets/kit-aroma-y-luz-abierta.jpg'
   },
   {
     id: 'pinta-el-momento', eje: 'crea', name: 'Pintá el momento',
@@ -53,7 +56,8 @@ const KITS = [
     desc: 'Una actividad artística sobre bastidor, con todo lo necesario para pintar.',
     items: ['bastidor de 20 x 20 cm', 'atril de madera', 'set de 6 pinceles', 'paleta', '5 acrílicos', 'lápiz para el boceto'],
     keep: 'el bastidor pintado y el atril',
-    img: 'assets/kit-pinta-el-momento.svg'
+    img: 'assets/kit-pinta-el-momento.jpg',
+    imgOpen: 'assets/kit-pinta-el-momento-abierta.jpg'
   },
   {
     id: 'skin-and-body-care', eje: 'pausa', name: 'Skin & Body Care',
@@ -61,7 +65,8 @@ const KITS = [
     desc: 'Un momento de autocuidado y relajación para compartir.',
     items: ['3 mascarillas Mely (rosa, lavanda y arándano)', 'parches de ojos y de labios', 'crema de manos Hinds', 'vincha', 'antifaz de gel', 'velitas'],
     keep: 'vincha y antifaz',
-    img: 'assets/kit-skin-and-body-care.svg'
+    img: 'assets/kit-skin-and-body-care.jpg',
+    imgOpen: 'assets/kit-skin-and-body-care-abierta.jpg'
   },
   {
     id: 'reset-sensorial', eje: 'pausa', name: 'Reset sensorial',
@@ -69,7 +74,8 @@ const KITS = [
     desc: 'Ordená tus pensamientos a través de la escritura, con té. Cada participante tiene su cuaderno y su tarjeta de consignas.',
     items: ['cuaderno A5', 'birome', 'microfibras', 'cinta washi', 'señalador', 'notas adhesivas', 'posa saquito', 'saquito de té', 'tarjeta de consignas', 'velitas'],
     keep: 'el cuaderno',
-    img: 'assets/kit-reset-sensorial.svg'
+    img: 'assets/kit-reset-sensorial.jpg',
+    imgOpen: 'assets/kit-reset-sensorial-abierta.jpg'
   }
 ];
 
@@ -90,13 +96,18 @@ const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
 const kitById = id => KITS.find(k => k.id === id);
 const ejeById = id => EJES.find(e => e.id === id);
 const icon = (name, cls = '') => `<svg class="icon ${cls}" aria-hidden="true"><use href="#i-${name}"/></svg>`;
-const kitAlt = k => `Caja del kit ${k.name} (imagen ilustrativa)`;
+const kitAlt = k => `Caja cerrada del kit ${k.name} (imagen ilustrativa)`;
+const kitAltOpen = k => `Caja abierta del kit ${k.name} con su contenido (imagen ilustrativa)`;
+const IMG_NOTE = 'Imágenes de carácter ilustrativo: no son fotos reales del producto.';
 
 /* ---------- Render: experiencias ---------- */
 function kitCard(k) {
   return `
   <article class="kit-card">
-    <div class="kit-card__img"><img src="${k.img}" alt="${kitAlt(k)}" width="800" height="800" loading="lazy" decoding="async"></div>
+    <div class="kit-card__img" data-kit="${k.id}">
+      <img src="${k.img}" alt="${kitAlt(k)}" width="1100" height="880" loading="lazy" decoding="async">
+      <img class="kit-card__open" src="${k.imgOpen}" alt="" width="1100" height="880" loading="lazy" decoding="async">
+    </div>
     <div class="kit-card__body">
       <h4 class="kit-card__name">${k.name}</h4>
       <p class="kit-card__phrase">${k.phrase}</p>
@@ -162,7 +173,11 @@ function openKit(id) {
   const e = ejeById(k.eje);
   const total = PRICE_PP * SIZES[0];
   $('#kit-modal-body').innerHTML = `
-    <div class="kit-modal__media"><img src="${k.img}" alt="${kitAlt(k)}" width="800" height="800"></div>
+    <div class="kit-modal__media">
+      <img src="${k.imgOpen}" alt="${kitAltOpen(k)}" width="1100" height="880">
+      <img src="${k.img}" alt="${kitAlt(k)}" width="1100" height="880" loading="lazy">
+      <p class="img-note">${IMG_NOTE}</p>
+    </div>
     <div class="kit-modal__content">
       <p class="eyebrow">${icon(e.id)} ${e.name}</p>
       <h2 id="kit-title">${k.name}</h2>
